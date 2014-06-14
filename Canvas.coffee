@@ -37,14 +37,14 @@ class Canvas
 		this.right = tmp.left + this.width
 		this.bottom = tmp.top + this.height
 	
-	# Pathを描写
+	# Pathを描写 (デフォルトはストローク)
 	@drawPath: (ctx, type) ->
-		if type == "s"
-			ctx.stroke()
 		if type == "f"
 			ctx.fill()
-		if type == "fs"
+		else if type == "fs"
 			ctx.fill()
+			ctx.stroke()
+		else
 			ctx.stroke()
 		
 	# ctxに、pointsの点を順につないだパスを追加

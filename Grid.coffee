@@ -22,8 +22,13 @@ class Grid extends Canvas
 		ctx.beginPath()
 		ctx.strokeStyle = color
 
+		if direction == "vertical"
+			length = this.width
+		else
+			length = this.height
+
 		i = 1
-		while i * step < this.width
+		while i * step < length
 			if direction == "horizontal"
 				ctx.moveTo(0, i*step)
 				ctx.lineTo(this.width, i*step)
