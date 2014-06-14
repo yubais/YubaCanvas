@@ -1,0 +1,38 @@
+test.coffee
+
+	# jQuery has been included
+
+	canvas = new Canvas($("#my-canvas"))
+
+	# line (open paht)
+	canvas.line({
+		"points": [[100,100], [100,200], [200,200]]
+	})
+
+	# polygonal (closed path)
+	canvas.polygonal({
+		"points": [[100,100], [100,200], [200,200]]
+		"type": "fs"  # s: stroke, f: fill, fs: both
+	})
+
+#--------------------------------------------------
+# Grid Object:
+#--------------------------------------------------
+
+othello.coffee
+	
+	# jQuery has been included
+
+	options = {
+		"cols": 8
+		"rows": 8
+		"bgColor": "#008800"
+	}
+
+	grid = new Grid($("#my-grid"), {"cols":8, "rows":8})
+
+	grid.stone("black", 3, 3)
+	grid.stone("black", 4, 4)
+	grid.stone("white", 3, 4)
+	grid.stone("white", 4, 3)
+

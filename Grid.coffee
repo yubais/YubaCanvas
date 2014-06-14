@@ -1,8 +1,7 @@
 class Grid extends Canvas
 	constructor: (jqo, args) ->
 		super(jqo)
-		this.gridColor = "#000000"
-		this.gridColor = args.gridColor if args.gridColor?
+		this.gridColor = if args.gridColor then args.gridColor else "#000000"
 		this.bgColor = "#ffffff"
 		this.bgColor = args.bgColor if args.bgColor?
 		this.cols = args.cols
@@ -20,7 +19,7 @@ class Grid extends Canvas
 	drawGrid: (direction, step, color) ->
 		ctx = this.ctx()
 		ctx.beginPath()
-		ctx.strokeStyle = color
+		ctx.strokeStyle = if color then color else this.gridColor
 
 		if direction == "vertical"
 			length = this.width
@@ -39,7 +38,10 @@ class Grid extends Canvas
 		ctx.stroke()
 	
 	# 指定されたマス目を指定された色で塗りつぶす
-	fill: (color, x, y) ->
+	fill: (color, x, y, strokeColor) ->
+		if not (x? or y?)
+			throw new Error("position not defined")
+			
 		this.polygonal({
 			points: [
 				[this.xstep *  x   , this.ystep *  y   ]
@@ -48,7 +50,7 @@ class Grid extends Canvas
 				[this.xstep *  x   , this.ystep * (y+1)]
 			]
 			type: "fs"
-			strokeColor: this.gridColor
+			strokeColor: if strokeColor then strokeColor else this.gridColor
 			fillColor: color
 		})
 	
